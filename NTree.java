@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class NTree<E> {
 
@@ -15,6 +16,11 @@ public class NTree<E> {
 		protected void addChild(Node c) { children.add(c); }
 		public boolean equals(Node rhs) {
 			return this.data.equals(rhs.data);
+		}
+
+		public NTree<E>.Node serialize(String fname) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 
@@ -49,9 +55,34 @@ public class NTree<E> {
 		return true;
 	}
 
-	public void serialize(String fname) {}
+	public void serialize(String fname) throws IOException {
+            if (fname == "" || fname.isEmpty()) return;
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fname));  
+            if (root != null) {  
+                for (int i = 0; i < fname.length(); i++) {
+                    serialize(fname); 
+                }  
+                bw.append(")");
+                bw.close();
+           }
+	}
 
-	public void deserialize(String fname) {}
+
+
+	public void deserialize(String fname) throws IOException{
+			BufferedReader in = new BufferedReader(new FileReader(new File(fname)));
+            if (fname == "") return;
+            char marker = ')';
+            if (root != null) {
+            	for (int i = 0; i < fname.length(); i++) {  
+            		if (fname.charAt(i) == ')') {  
+                     in.skip(marker);
+                    }
+                }
+            }
+      }
+        
+      
 
 	public static void main(String [] args) {
 		try {
