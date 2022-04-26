@@ -42,7 +42,7 @@ public class NTree<E> {
 
 	protected boolean equals(Node lhs, Node rhs) {
 		if (lhs == null || rhs == null) return lhs == rhs;
-		if (!lhs.equals(rhs) || lhs.parent != rhs.parent) return false;
+		if (!lhs.equals(rhs)) return false;
 		for (int i = 0; i < lhs.children.size(); i++) {
 			if (!equals(lhs.children.get(i), rhs.children.get(i))) return false;
 		}
